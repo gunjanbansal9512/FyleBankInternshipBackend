@@ -1,4 +1,5 @@
-from flask import Flask, jsonify ,request
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 DB_HOST = ""
 DB_NAME = "banks"
 DB_USER = "postgres"
@@ -26,6 +27,8 @@ def query_db(query, args=(), one=False):
 
 
 app = Flask(__name__)
+CORS(app)
+
 @app.route('/')
 def hello_world():
     return("Hi please pass the parameters like /api/branches/<q>")
@@ -34,8 +37,6 @@ def getData():
     branch = request.args['q']
     limit = request.args['limit']
     offset = request.args['offset']
-    if (offset == None):
-        offset=0
     branch.upper()
     myquery = query_db(f"select * from branches where branch like '%{branch}%' limit  {limit} offset {offset}")
     json_output = json.dumps(myquery)
@@ -43,10 +44,13 @@ def getData():
    
 @app.route("/api/branches",methods=["GET"])
 def getData_all():
-    myquery = query_db("select * from branches")
+    city = request.args['q']
+    limit = request.args['limit']
+    offset = request.args['offset']
+    myquery = query_db(f"select banks.name,banks.id,branches.ifsc,branches.city,branches.district from banks,branches where banks.id = branches.bank_id AND branches.city= '{city}' limit {limit} offset {offset} ")
     json_output = json.dumps(myquery)
-    # return json_output
-    return request.args['q'] + "" + request.args['limit'] + "" + request.args['offset']
+    return json_output
+    # return request.args['q'] + "" + request.args['limit'] + "" + request.args['offset']
     # return request.args['q']+""+request.args['limit']+""+request.args['offset']
 if __name__ == "__main__":
     app.run(debug=True)
