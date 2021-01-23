@@ -1,0 +1,16 @@
+ pip3 install psycopg2
+ DB_HOST = ""
+DB_NAME = "banks"
+DB_USER = "postgres"
+DB_PASS = "root"
+DB_PORT = "5555"
+
+import psycopg2
+
+conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
+cur = conn.cursor()
+cur.execute("select * from banks")
+print (cur.fetchall())
+conn.commit()
+cur.close()
+conn.close()
