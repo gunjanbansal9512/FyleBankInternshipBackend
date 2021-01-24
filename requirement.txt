@@ -1,16 +1,17 @@
- pip3 install psycopg2
- DB_HOST = ""
-DB_NAME = "banks"
-DB_USER = "postgres"
-DB_PASS = "root"
-DB_PORT = "5555"
+# This file is used by pip to install required python packages
+# Usage: pip install -r requirements.txt
 
-import psycopg2
+# Flask Framework
+Flask==1.0.2
 
-conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST, port=DB_PORT)
-cur = conn.cursor()
-cur.execute("select * from banks")
-print (cur.fetchall())
-conn.commit()
-cur.close()
-conn.close()
+# Flask Packages
+Flask-Login==0.4.0
+Flask-Migrate==2.0.2
+Flask-Script==2.0.5
+Flask-SQLAlchemy==2.4.0
+Flask-WTF==0.14.2
+Flask-User==1.0.1.5
+
+# Automated tests
+pytest==3.0.5
+pytest-cov==2.4.0
