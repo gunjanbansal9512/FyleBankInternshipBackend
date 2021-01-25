@@ -1,10 +1,10 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-DB_HOST = ""
-DB_NAME = "banks"
-DB_USER = "postgres"
-DB_PASS = "root"
-DB_PORT = "5555"
+DB_HOST = "ec2-54-84-238-74.compute-1.amazonaws.com"
+DB_NAME = "degeu1cikkc76v"
+DB_USER = "imvqhhchvpvrsw"
+DB_PASS = "a58e8ccc9c9ade298bfae086816cce03cfc33273eea8055e95cf60bb0b2297fc"
+DB_PORT = "5432"
 
 import psycopg2
 import json
